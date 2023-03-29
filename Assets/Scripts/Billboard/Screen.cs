@@ -46,4 +46,16 @@ public class Screen : MonoBehaviour
         vp.clip = _clip;
 
     }
+
+    public void Play()
+    {
+
+        if (vp.isPlaying) return; //이미 플레이중 예외처리
+        vp.Play();
+    }
+    public void Pause()
+    {
+        if(vp.isPaused) return;
+        vp.Pause();
+    }
 }
