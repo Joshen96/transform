@@ -27,10 +27,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             //tr.position.z = 10f;
-            Vector3 newPos = transform.position;
-            newPos.z += moveSpeed * Time.deltaTime;
-            transform.position = newPos;
-            //rb.velocity = tr.forward * moveSpeed;
+            //Vector3 newPos = transform.position;
+            //newPos.z += moveSpeed * Time.deltaTime;
+            //transform.position = newPos;
+            rb.velocity = tr.forward * moveSpeed;
         }
 
         if (Input.GetKeyUp(KeyCode.W))
