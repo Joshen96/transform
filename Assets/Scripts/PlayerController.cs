@@ -1,10 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // 상속(Inheritance)
 public class PlayerController : MonoBehaviour
 {
+    //델리게이트 : 대리자 대신해주는
+
+    public delegate void MLBDelegate(); //마우스 왼쪽 버튼  자료형임
+    public delegate void MRBDelegate(); //오른쪽 
+
+
+    private MLBDelegate mlbCallback = null; //변수생성
+    private MRBDelegate mrbCallback = null; //변수생성
+
+
+
+
     // Class Member Variables
     private Transform tr = null;
     private Rigidbody rb = null;
@@ -85,10 +98,42 @@ public class PlayerController : MonoBehaviour
         {
             tr.localScale = Vector3.one;
         }
+
+        // 마우스 입력
+        if(Input.GetMouseButtonDown(0))//예전방식
+        {
+            if(mlbCallback != null)  
+                mlbCallback();
+        }
+
+        if(Input.GetMouseButtonDown(1))//지금방식
+        {
+            mrbCallback?.Invoke();  //?는 null 검사 하는것
+        }
     }
 
+
+    //마우스 입력
+
+  
+
+    //델리게이트 설정 함수
+    public void SetMLBDelegate(MLBDelegate _callback)
+    {
+        mlbCallback = _callback;   
+    }
+
+    public void SetMRBDelegate(MRBDelegate _callback)
+    {
+        mrbCallback = _callback;
+    }
+
+
+    /*
     private void OnCollisionEnter(Collision _collision)
     {
         Debug.Log(_collision.gameObject.name);
     }
+    */
+
 }

@@ -21,7 +21,8 @@ public class Billboard : MonoBehaviour
     //거리에따라 플레이 기능
     //오리와 빌보드의 거리계산
     //Screen Play Distance
-    private readonly float screnPlayDist = 30f; //10미터기준 
+    
+    private readonly float screnPlayDist = 20f; //10미터기준 
 
     private void Awake()
     {
