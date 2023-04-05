@@ -16,7 +16,7 @@ public class Billboard : MonoBehaviour
 
     
     private AnchorPivot apj = null;
-    private Screen screen = null;
+    private Screen1 screen = null;
 
     //거리에따라 플레이 기능
     //오리와 빌보드의 거리계산
@@ -32,7 +32,7 @@ public class Billboard : MonoBehaviour
 
         //GameObject.Find  == 찾는 비용이 비쌈 
         apj = GetComponentInChildren<AnchorPivot>(); //이런식으로 찾음 빌보드안에 자식으로 있는 스크립트
-        screen = GetComponentInChildren<Screen>();
+        screen = GetComponentInChildren<Screen1>();
 
         //회전은 앵커피벗이하고 얼마나 돌아야하는지 계산은 빌보드가 한다.
 
