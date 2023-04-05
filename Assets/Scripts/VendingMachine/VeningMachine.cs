@@ -20,11 +20,12 @@ public class VeningMachine : MonoBehaviour
 
 
     [System.Serializable] //직렬화 하겠다.
-    public struct SProductInfo
+    public class SProductInfo
     {
         public EVMProduct Product;
         public int price;
         public int stock;
+     
 
         public bool CheckStock() { return stock > 0; }
         public void Sell() {
@@ -33,8 +34,8 @@ public class VeningMachine : MonoBehaviour
 
     }
 
-
-    [SerializeField]
+     //어떤ui에 뿌릴지
+    [SerializeField] 
     private UIMenu uiMenu = null; //컴포넌트 받기위해 드래그로 
 
 
@@ -42,7 +43,7 @@ public class VeningMachine : MonoBehaviour
     //Template
     //구조체 리스트
     [SerializeField]
-    private List<SProductInfo> ProductInfoList = new List<SProductInfo>();
+    private List<SProductInfo> ProductInfoList = new List<SProductInfo>(); //밴딩머신에 있는 상품정보리스트
 
 
 
@@ -67,7 +68,7 @@ public class VeningMachine : MonoBehaviour
             if (uiMenu)
             {
                 uiMenu.BuildButtons(ProductInfoList,OnClickMenu); //델리게이트
-                uiMenu.gameObject.SetActive(true);
+                uiMenu.gameObject.SetActive(true); //ui 활성화
 
             }
         }
@@ -115,7 +116,7 @@ public class VeningMachine : MonoBehaviour
         if (selectedInfo.stock < 1) return;
             */
 
-        Debug.Log(
+        Debug.Log("팔기전"+
            ProductInfoList[_btnNum].Product.ToString()+"("+
            ProductInfoList[_btnNum].price+")"+
            ProductInfoList[_btnNum].stock
@@ -123,14 +124,18 @@ public class VeningMachine : MonoBehaviour
 
         if (!ProductInfoList[_btnNum].CheckStock()) return; //재고있는지 검사
         ProductInfoList[_btnNum].Sell(); //팔기
-
+        Debug.Log("팔린후" +
+           ProductInfoList[_btnNum].Product.ToString() + "(" +
+           ProductInfoList[_btnNum].price + ")" +
+           ProductInfoList[_btnNum].stock
+            );
         //상품 만들기
         //보유
         //버튼 갱신 파이썬프로젝트때도 리스트 갱신했던기억이..
         //버튼 정보 갱신
 
-       
-       
+
+
 
 
     }

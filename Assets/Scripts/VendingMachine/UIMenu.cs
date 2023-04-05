@@ -30,12 +30,12 @@ public class UIMenu : MonoBehaviour
 
         for(int i=0; i<_productInfoList.Count; i++) 
         {
-            GameObject go = Instantiate(menuBtnPrefab);
+            GameObject go = Instantiate(menuBtnPrefab); //버튼 한개씩 생성
             //go.transform.SetParent(transform);
             //go.transform.localPosition = Vector3.zero;
-            RectTransform rectTf = go.GetComponent<RectTransform>();
-            rectTf.SetParent(GetComponent<RectTransform>());
-            rectTf.localPosition = CalcLocalPositionWithIndex(i,_productInfoList.Count);
+            RectTransform rectTf = go.GetComponent<RectTransform>(); // 각버튼의 rect정보
+            rectTf.SetParent(GetComponent<RectTransform>());//
+            rectTf.localPosition = CalcLocalPositionWithIndex(i,_productInfoList.Count);//부모의 위치의
             /*
             if (_productInfoList.Count == 3) 
             {
