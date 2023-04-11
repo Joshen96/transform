@@ -9,7 +9,7 @@ public class UIMenu : MonoBehaviour
 {
 
     ///델리게이트 만들기
-    public delegate void OnClickMenuDelegate(int _btnNum);
+    public delegate void OnClickMenuDelegate(int _btnNum, UI_MenuButton _menubtn);
 
     /// </summary>
     //버튼 배치 
@@ -21,9 +21,10 @@ public class UIMenu : MonoBehaviour
     //
     public void BuildButtons(
         List<VeningMachine.SProductInfo> _productInfoList,
-        OnClickMenuDelegate _onClickCallback) //리스트는 참조로받아짐  //버튼추가  //델리게이트
+        OnClickMenuDelegate _onClickCallback ,int _Pmoney) //리스트는 참조로받아짐  //버튼추가  //델리게이트
     {
-        if(_productInfoList == null || _productInfoList.Count == 0) return;
+        
+        if (_productInfoList == null || _productInfoList.Count == 0) return;
 
         if (menuBtnList != null && menuBtnList.Count > 0) ClearMenuButtonList();  //할당전 지워주기  계속추가 되는것 방지
         menuBtnList = new List<UI_MenuButton>();
@@ -35,7 +36,7 @@ public class UIMenu : MonoBehaviour
             //go.transform.localPosition = Vector3.zero;
             RectTransform rectTf = go.GetComponent<RectTransform>(); // 각버튼의 rect정보
             rectTf.SetParent(GetComponent<RectTransform>());//
-            rectTf.localPosition = CalcLocalPositionWithIndex(i,_productInfoList.Count);//부모의 위치의
+            rectTf.localPosition = CalcLocalPositionWithIndex(i,_productInfoList.Count);//부모의 위치
             /*
             if (_productInfoList.Count == 3) 
             {
@@ -82,7 +83,7 @@ public class UIMenu : MonoBehaviour
             */
             btn.InitInfos(_productInfoList[i],
                 i,
-                _onClickCallback);
+                _onClickCallback,_Pmoney);
 
 
             /*
@@ -194,4 +195,12 @@ public class UIMenu : MonoBehaviour
 
 
     }
+    /*
+     public void UpdateButtonInfo(
+         int _btnNum,
+         VeningMachine.SProductInfo _productInfo)  //밴딩머신의 정보
+    {
+        menuBtnList[_btnNum].UpdateInfo( _productInfo );
+    }
+    */
 }

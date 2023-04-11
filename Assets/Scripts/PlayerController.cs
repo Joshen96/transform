@@ -11,10 +11,12 @@ public class PlayerController : MonoBehaviour
     public delegate void MLBDelegate(); //마우스 왼쪽 버튼  자료형임
     public delegate void MRBDelegate(); //오른쪽 
 
-
     private MLBDelegate mlbCallback = null; //변수생성
     private MRBDelegate mrbCallback = null; //변수생성
 
+    public delegate void VoidVoidDelegate();
+    public delegate bool VoidBoolDelegate(int _val);
+    private VoidVoidDelegate useCallBack = null;
 
 
 
@@ -27,7 +29,8 @@ public class PlayerController : MonoBehaviour
     private float moveSpeed = 10f;
     [SerializeField, Range(50f, 100f)]
     private float rotSpeed = 50f;
-
+    [SerializeField]
+    private UIMoney uiMoney = null;
     private void Awake()
     {
         tr = GetComponent<Transform>();
@@ -44,11 +47,13 @@ public class PlayerController : MonoBehaviour
             //newPos.z += moveSpeed * Time.deltaTime;
             //transform.position = newPos;
             rb.velocity = tr.forward * moveSpeed;
+            uiMoney.UpdatePosition(transform.position);
         }
 
         if (Input.GetKeyUp(KeyCode.W))
         {
             rb.velocity = Vector3.zero;
+            uiMoney.UpdatePosition(transform.position);
         }
 
             if (Input.GetKey(KeyCode.S))
@@ -58,18 +63,21 @@ public class PlayerController : MonoBehaviour
                     (-tr.forward * moveSpeed * Time.deltaTime);
 
                 transform.position = newPos;
-            }
+            uiMoney.UpdatePosition(transform.position);
+        }
 
         if (Input.GetKey(KeyCode.A))
         {
             tr.Translate(
                 Vector3.left * moveSpeed * Time.deltaTime);
+            uiMoney.UpdatePosition(transform.position);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             tr.Translate(
                 Vector3.right * moveSpeed * Time.deltaTime);
+            uiMoney.UpdatePosition(transform.position);
         }
 
         if (Input.GetKey(KeyCode.Q))
@@ -110,6 +118,13 @@ public class PlayerController : MonoBehaviour
         {
             mrbCallback?.Invoke();  //?는 null 검사 하는것
         }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            useCallBack?.Invoke();
+        }
+
+
     }
 
 
@@ -128,7 +143,10 @@ public class PlayerController : MonoBehaviour
         mrbCallback = _callback;
     }
 
-
+    public void SetUseDelegate(VoidVoidDelegate _callback)
+    {
+        useCallBack = _callback;
+    }
     /*
     private void OnCollisionEnter(Collision _collision)
     {

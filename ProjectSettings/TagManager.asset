@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Electronics
   - Vendingmachine
+  - Product
   layers:
   - Default
   - TransparentFX
